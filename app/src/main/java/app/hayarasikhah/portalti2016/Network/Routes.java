@@ -8,6 +8,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 /**
@@ -30,5 +31,14 @@ public interface Routes {
     @DELETE ("mahasiswatest/{mhsId}")
     Call<Mahasiswa> deleteMahasiswa(
             @Path("mhsId") String mhsId
+    );
+
+
+    @PUT ("mahasiswatest/{mhsId}")
+    @FormUrlEncoded
+    Call<Mahasiswa> updateMahasiswa(
+            @Path("mhsId") String mhsId,
+            @Field("name") String name,
+            @Field("nim") String nim
     );
 }

@@ -3,6 +3,7 @@ package app.hayarasikhah.portalti2016;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import app.hayarasikhah.portalti2016.Adapter.MahasiswaAdapter;
@@ -20,6 +20,7 @@ import app.hayarasikhah.portalti2016.Entity.DaftarMahasiswa;
 import app.hayarasikhah.portalti2016.Entity.Mahasiswa;
 import app.hayarasikhah.portalti2016.Network.Network;
 import app.hayarasikhah.portalti2016.Network.Routes;
+import app.hayarasikhah.portalti2016.util.Consts;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     //deklarasikan recyclerviewnya
     private RecyclerView lstMahasiswa;
+
+    FloatingActionButton btn_add;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,12 +44,16 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         lstMahasiswa.setLayoutManager(linearLayoutManager);
 
+        btn_add = (FloatingActionButton) findViewById(R.id.btn_add);
+
         //requestDaftarMahasiswa();
 
         findViewById(R.id.btn_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AddMahasiswaActivity.class));
+                Intent addIntent = new Intent(MainActivity.this, DetailMahasiswaActivity.class);
+                addIntent.putExtra(Consts.KEY_ACTION_DETAIL, Consts.INTENT_ADD);
+                startActivity(addIntent);
             }
         });
     }
